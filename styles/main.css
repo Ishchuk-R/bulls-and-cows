@@ -48,14 +48,20 @@ button:focus {
   background: #333;
   -webkit-transform: translateY(-100vh);
           transform: translateY(-100vh);
+  -webkit-transition: 0.3s opacity 0s, -webkit-transform 0.3s;
+  transition: 0.3s opacity 0s, -webkit-transform 0.3s;
+  transition: transform 0.3s, 0.3s opacity 0s;
+  transition: transform 0.3s, 0.3s opacity 0s, -webkit-transform 0.3s;
+  opacity: 1; }
+
+.modal-block.visible {
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+  opacity: 1;
   -webkit-transition: -webkit-transform 0.3s;
   transition: -webkit-transform 0.3s;
   transition: transform 0.3s;
   transition: transform 0.3s, -webkit-transform 0.3s; }
-
-.modal-block.visible {
-  -webkit-transform: translateY(0);
-          transform: translateY(0); }
 
 .modal-content {
   max-width: 600px;
