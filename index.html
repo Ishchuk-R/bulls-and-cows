@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bulls&Cow</title>
+  <link href="img/favicon.png" rel="shortcut icon">
+  <link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <main>
+    <section class="promo-block">
+      <div class="container">
+        <h1 class="text-success">Bulls and Cows</h1>
+        <div class="alert center alert-info">
+          <div class="alert-heading text-success">Discover the hidden code!!!</div>
+
+          <div>- computer randomly generates a number of 4 different digits</div>
+          <div>- you enters a number of 4 different digits too</div>
+          <div>- computer compares given numbers and shows a result of 'bulls' and 'cows'</div>
+          <div>
+            - `bull` - guessed digit is on its place (index) and `cow` - guessed digit exists in the number but the place (index) is wrong
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="modalWindow" class="modal-block">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Enter four-digit number</h5>
+          <button type="button" id="closeWindow" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input class="form-control form-control-lg"  type="text" placeholder="Try!!! Entered number!" id="playNumber">
+        </div>
+        <div class="modal-footer">
+          <button id="giveUp" type="button" class="btn btn-danger" data-dismiss="modal">Give up</button>
+          <button id="try" type="button" class="btn btn-warning">Never give up</button>
+        </div>
+      </div>
+    </section>
+    <section class="container play-block">
+      <div class="list-group" id="result"></div>
+      <button class="btn btn-primary" id="play">Let's Play!!!</button>
+    </section>
+  </main>
+<script src="scripts/main.js"></script>
+</body>
+</html>
