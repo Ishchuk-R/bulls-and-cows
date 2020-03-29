@@ -55,11 +55,14 @@ button:focus {
   display: flex;
   background: #333;
   transform: translateY(-100vh);
-  transition: transform 0.3s;
+  transition: transform 0.3s, 0.3s opacity 0s;
+  opacity: 1;
 }
 
 .modal-block.visible {
   transform: translateY(0);
+  opacity: 1;
+  transition: transform 0.3s;
 }
 
 .modal-content {
