@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bulls&Cow</title>
-  <link href="img/favicon.png" rel="shortcut icon">
+  <link href="images/favicon.png" rel="shortcut icon">
   <link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
   <link rel="stylesheet" href="styles/main.css">
 </head>
@@ -34,7 +34,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <input class="form-control form-control-lg"  type="text" placeholder="Try!!! Entered number!" id="playNumber">
+          <input class="form-control form-control-lg" pattern='[0-9]{4}' type="text" placeholder="Try!!! Entered number!" id="playNumber">
         </div>
         <div class="modal-footer">
           <button id="giveUp" type="button" class="btn btn-danger" data-dismiss="modal">Give up</button>
@@ -45,6 +45,7 @@
     <section class="container play-block">
       <div class="list-group" id="result"></div>
       <button class="btn btn-primary" id="play">Let's Play!!!</button>
+      <button class="btn new-game btn-primary" id="newGame">Start new game</button>
     </section>
   </main>
 <script src="scripts/main.js"></script>
