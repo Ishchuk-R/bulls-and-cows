@@ -5,18 +5,27 @@ let enteredNumber = '';
 const enteredInput = document.getElementById('playNumber');
 const modalWindow = document.getElementById('modalWindow');
 const play = document.getElementById('play');
+const newGameBtn = document.getElementById('newGame');
+const resultBlock = document.getElementById('result');
 
 /* Generate number */
-while (generateNumber.length < 4) {
-  const NumberThis = (function() {
-    return Math.floor(Math.random() * 10);
-  })();
+function generateNewNumber() {
+  generateNumber = '';
+  while (generateNumber.length < 4) {
+    const NumberThis = (function() {
+      return Math.floor(Math.random() * 10);
+    })();
 
-  if (generateNumber.search(NumberThis) === -1) {
-    generateNumber += NumberThis;
+    if (generateNumber.search(NumberThis) === -1) {
+      generateNumber += NumberThis;
+    }
   }
+  console.log(generateNumber);
 }
-console.log(generateNumber);
+
+generateNewNumber();
+
+
 
 /* modalWindow function */
 function modalWindowStatus(status) {
@@ -63,7 +72,6 @@ const bullsAndCows = function(generatedNumber, enteredNumber) {
 
 /* Render function */
 function renderBullsandCowsItem(result, enteredNumber) {
-  const resultBlock = document.getElementById('result');
   const element = document.createElement('div');
   const enterNum = document.createElement('span');
   const enterText = document.createElement('span');
@@ -88,6 +96,7 @@ function renderBullsandCowsItem(result, enteredNumber) {
     element.className += ` bg-success`;
     enterText.innerHTML = `Congratulation. You win!!! Entered number is correct!!!`;
     play.style.display = 'none';
+    newGameBtn.style.display = 'inline-block';
   } else {
     element.innerHTML = `Something went wrong.`;
   }
@@ -134,4 +143,13 @@ document.getElementById('try').onclick = function() {
 document.getElementById('giveUp').onclick = function() {
   modalWindowStatus(false);
   renderBullsandCowsItem('giveUp');
+  newGameBtn.style.display = 'inline-block';
 };
+
+/* Click New game btn */
+newGameBtn.onclick = function() {
+  play.style.display = 'inline-block';
+  newGameBtn.style.display = 'none';
+  resultBlock.innerHTML = '';
+  generateNewNumber();
+}

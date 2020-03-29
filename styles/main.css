@@ -84,4 +84,7 @@ button:focus {
   .alert {
     margin-top: 140px; } }
 
+.new-game {
+  display: none; }
+
 /*# sourceMappingURL=main.css.map */
