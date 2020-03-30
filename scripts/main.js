@@ -10,17 +10,20 @@ const resultBlock = document.getElementById('result');
 
 /* Generate number */
 function generateNewNumberFunc() {
-  let generateNumber = '';
-  while (generateNumber.length < 4) {
+  let generateNum = '';
+
+  while (generateNum.length < 4) {
     const NumberThis = (function() {
       return Math.floor(Math.random() * 10);
     })();
 
-    if (generateNumber.search(NumberThis) === -1) {
-      generateNumber += NumberThis;
+    if (generateNum.search(NumberThis) === -1) {
+      generateNum += NumberThis;
     }
   }
-  return generateNumber;
+  console.log(generateNum);
+
+  return generateNum;
 }
 
 /* modalWindow function */
@@ -79,22 +82,27 @@ function renderBullsandCowsItem(result, enteredNumber) {
   element.append(enterNum);
   element.append(enterText);
 
-  if (result === null) {
-    element.className += ` bg-danger`;
-    enterText.innerHTML = `Wrong entered data. Are the numbers repeated?`;
-  } else if (result === 'giveUp') {
-    element.className += ` bg-info`;
-    element.innerHTML = `Don't worry. You win next time!!! Right answer is ${generateNumber}`;
-    play.style.display = 'none';
-  } else if (result.bulls < 4) {
-    enterText.innerHTML = `Cows: ${result.cows}  Bulls: ${result.bulls}`;
-  } else if (result.bulls === 4) {
-    element.className += ` bg-success`;
-    enterText.innerHTML = `Congratulation. You win!!! Entered number is correct!!!`;
-    play.style.display = 'none';
-    newGameBtn.style.display = 'inline-block';
-  } else {
-    element.innerHTML = `Something went wrong.`;
+  switch(true){
+
+    case (result === null):
+      element.className += ` bg-danger`;
+      enterText.innerHTML = `Wrong entered data. Are the numbers repeated?`;
+      break;
+    case (result === 'giveUp'):
+      element.className += ` bg-info`;
+      element.innerHTML = `Don't worry. You win next time!!! Right answer is ${generateNumber}`;
+      break;
+    case (result.bulls < 4):
+      enterText.innerHTML = `Cows: ${result.cows}  Bulls: ${result.bulls}`;
+      break;
+    case (result.bulls === 4):
+      element.className += ` bg-success`;
+      enterText.innerHTML = `Congratulation. You win!!! Entered number is correct!!!`;
+      play.style.display = 'none';
+      newGameBtn.style.display = 'inline-block';
+      break;
+    default:
+      element.innerHTML = `Something went wrong.`;
   }
 };
 
@@ -147,4 +155,4 @@ newGameBtn.onclick = function() {
   newGameBtn.style.display = 'none';
   resultBlock.innerHTML = '';
   generateNumber = generateNewNumberFunc();
-}
+};
