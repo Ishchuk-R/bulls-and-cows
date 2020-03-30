@@ -1,6 +1,6 @@
 'use strict';
 
-let generateNumber = '';
+let generateNumber = generateNewNumberFunc();
 let enteredNumber = '';
 const enteredInput = document.getElementById('playNumber');
 const modalWindow = document.getElementById('modalWindow');
@@ -9,23 +9,22 @@ const newGameBtn = document.getElementById('newGame');
 const resultBlock = document.getElementById('result');
 
 /* Generate number */
-function generateNewNumber() {
-  generateNumber = '';
-  while (generateNumber.length < 4) {
+function generateNewNumberFunc() {
+  let generateNum = '';
+
+  while (generateNum.length < 4) {
     const NumberThis = (function() {
       return Math.floor(Math.random() * 10);
     })();
 
-    if (generateNumber.search(NumberThis) === -1) {
-      generateNumber += NumberThis;
+    if (generateNum.search(NumberThis) === -1) {
+      generateNum += NumberThis;
     }
   }
-  console.log(generateNumber);
+  console.log(generateNum);
+
+  return generateNum;
 }
-
-generateNewNumber();
-
-
 
 /* modalWindow function */
 function modalWindowStatus(status) {
@@ -83,22 +82,27 @@ function renderBullsandCowsItem(result, enteredNumber) {
   element.append(enterNum);
   element.append(enterText);
 
-  if (result === null) {
-    element.className += ` bg-danger`;
-    enterText.innerHTML = `Wrong entered data. Are the numbers repeated?`;
-  } else if (result === 'giveUp') {
-    element.className += ` bg-info`;
-    element.innerHTML = `Don't worry. You win next time!!! Right answer is ${generateNumber}`;
-    play.style.display = 'none';
-  } else if (result.bulls < 4) {
-    enterText.innerHTML = `Cows: ${result.cows}  Bulls: ${result.bulls}`;
-  } else if (result.bulls === 4) {
-    element.className += ` bg-success`;
-    enterText.innerHTML = `Congratulation. You win!!! Entered number is correct!!!`;
-    play.style.display = 'none';
-    newGameBtn.style.display = 'inline-block';
-  } else {
-    element.innerHTML = `Something went wrong.`;
+  switch(true){
+
+    case (result === null):
+      element.className += ` bg-danger`;
+      enterText.innerHTML = `Wrong entered data. Are the numbers repeated?`;
+      break;
+    case (result === 'giveUp'):
+      element.className += ` bg-info`;
+      element.innerHTML = `Don't worry. You win next time!!! Right answer is ${generateNumber}`;
+      break;
+    case (result.bulls < 4):
+      enterText.innerHTML = `Cows: ${result.cows}  Bulls: ${result.bulls}`;
+      break;
+    case (result.bulls === 4):
+      element.className += ` bg-success`;
+      enterText.innerHTML = `Congratulation. You win!!! Entered number is correct!!!`;
+      play.style.display = 'none';
+      newGameBtn.style.display = 'inline-block';
+      break;
+    default:
+      element.innerHTML = `Something went wrong.`;
   }
 };
 
@@ -121,12 +125,11 @@ document.getElementById('closeWindow').onclick = function() {
 };
 
 /* Validation enter input */
-enteredInput.onkeypress = function(e) {
+enteredInput.oninput = function(e) {
   e.target.value.search(/\b\d{1,4}\b/) === -1 ? this.classList.add('is-invalid')
     : this.classList.remove('is-invalid');
-
   if (isNaN(e.target.value)) {
-    event.preventDefault();
+    e.preventDefault();
   }
 
   if (e.key === 'Enter') {
@@ -151,5 +154,5 @@ newGameBtn.onclick = function() {
   play.style.display = 'inline-block';
   newGameBtn.style.display = 'none';
   resultBlock.innerHTML = '';
-  generateNewNumber();
-}
+  generateNumber = generateNewNumberFunc();
+};
