@@ -1,6 +1,6 @@
 'use strict';
 
-let generateNumber = '';
+let generateNumber = generateNewNumberFunc();
 let enteredNumber = '';
 const enteredInput = document.getElementById('playNumber');
 const modalWindow = document.getElementById('modalWindow');
@@ -9,8 +9,8 @@ const newGameBtn = document.getElementById('newGame');
 const resultBlock = document.getElementById('result');
 
 /* Generate number */
-function generateNewNumber() {
-  generateNumber = '';
+function generateNewNumberFunc() {
+  let generateNumber = '';
   while (generateNumber.length < 4) {
     const NumberThis = (function() {
       return Math.floor(Math.random() * 10);
@@ -20,12 +20,8 @@ function generateNewNumber() {
       generateNumber += NumberThis;
     }
   }
-  console.log(generateNumber);
+  return generateNumber;
 }
-
-generateNewNumber();
-
-
 
 /* modalWindow function */
 function modalWindowStatus(status) {
@@ -121,12 +117,11 @@ document.getElementById('closeWindow').onclick = function() {
 };
 
 /* Validation enter input */
-enteredInput.onkeypress = function(e) {
+enteredInput.oninput = function(e) {
   e.target.value.search(/\b\d{1,4}\b/) === -1 ? this.classList.add('is-invalid')
     : this.classList.remove('is-invalid');
-
   if (isNaN(e.target.value)) {
-    event.preventDefault();
+    e.preventDefault();
   }
 
   if (e.key === 'Enter') {
@@ -151,5 +146,5 @@ newGameBtn.onclick = function() {
   play.style.display = 'inline-block';
   newGameBtn.style.display = 'none';
   resultBlock.innerHTML = '';
-  generateNewNumber();
+  generateNumber = generateNewNumberFunc();
 }

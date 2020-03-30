@@ -52,7 +52,7 @@ button:focus {
   transition: 0.3s opacity 0s, -webkit-transform 0.3s;
   transition: transform 0.3s, 0.3s opacity 0s;
   transition: transform 0.3s, 0.3s opacity 0s, -webkit-transform 0.3s;
-  opacity: 1; }
+  opacity: 0; }
 
 .modal-block.visible {
   -webkit-transform: translateY(0);
